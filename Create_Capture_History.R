@@ -11,7 +11,7 @@ library(camtrapR)
 library(here)
 
 #read in dataset
-cameras <- fread("example_data.csv")
+cameras <- fread("example_data2.csv")
 names(cameras) <- gsub(" ",".",names(cameras))  #remove spaces from column headers and replace with '.'
 
 #####Work flow####
