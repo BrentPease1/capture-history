@@ -3,9 +3,12 @@
 #2017-11-15
 #Parts adpated from R script 'MakeCH_new_and_better', author = Arielle Parsons, NC Muesum of Nat.Sci.
 
+ols.sys.timezone <- Sys.timezone()
+Sys.setenv(TZ = 'GMT')
+
 #install.packages("data.table")
 #install.packages("camtrapR")
-#devtools::install_github("krlmlr/here") #a package 'here'. This let's us easily specify the outDir for our final Capture History
+#devtools::install_github("krlmlr/here") #a package 'here'. Be sure to get this package. This let's us easily specify the outDir for our final Capture History without the Directory being specific to an individual's machine. 
 library(data.table)
 library(camtrapR)
 library(here)
@@ -19,6 +22,8 @@ names(cameras) <- gsub(" ",".",names(cameras))  #remove spaces from column heade
 #2. Using the camera station table, create a 'camera operation matrix' (this is an object (or file) describing the data/time a camera was operating and the total number of days camera was running)
 #3. Format initial dataset object (in this case, cameras) to be a 'record table' (This is an object (or file) containing all unique capture events, their location, and date/time)
 #4. Create capture history (i.e., detection history) of specified species using camtrapR::detectionHistory
+##################
+
 #1.TO create camera station table, first find start and end camera dates 
 
 #replace 'T' in x.Time with " " (a space)
@@ -66,7 +71,7 @@ print(x)  #make sure this looks good
 x <- as.data.frame(x) #camtrapR needs data.frame. data.tables are data.frames, but...
 
 
-# create camera operation matrix
+# 2. create camera operation matrix
 # for an example of a CTtable, load data(camtraps) from camtrapR package then View(camtraps)
 
 camop <- cameraOperation(CTtable      = x,                           #this is our CT station information  
@@ -77,7 +82,7 @@ camop <- cameraOperation(CTtable      = x,                           #this is ou
                                     dateFormat   = "%Y-%m-%d"
 )
 
-#We just now need to format our initial .csv (in this case, 'cameras') to be a 'record table'
+#3. We just now need to format our initial .csv (in this case, 'cameras') to be a 'record table'
 #at minimum, we need a column for StationID, SpeciesID, and date/time. 
 #for an example, load data(recordTableSample) from camtrapR package then View(recordTableSample)
 
@@ -85,7 +90,7 @@ w <- cameras[,.(Deploy.ID,Common.Name,Begin.Time)] #data.frame with 3 columns
 colnames(w) <- c("Station","Species","DateTimeOriginal") #define column names
 w <- as.data.frame(w) #make sure this looks good 
 
-#compute detection history for a species
+#4. compute detection history for a species
 DetHist1 <- detectionHistory(recordTable         = w,                     #a list of all capture events with their location and date/time stamp
                              camOp                = camop,                #our camera trap operation matrix
                              stationCol           = "Station",            
@@ -99,4 +104,4 @@ DetHist1 <- detectionHistory(recordTable         = w,                     #a lis
                              includeEffort        = FALSE,               #compute trapping effort(number of active camera trap days per station and occasion)?
                              timeZone             = "GMT",
                              writecsv = TRUE,
-                             outDir = here("Capture_Histories"))
+                             outDir = here("Capture_Histories"))         #here specifies the base directory and then "Capture_Histories" specifies folder within base directory
