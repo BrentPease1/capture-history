@@ -91,7 +91,7 @@ colnames(w) <- c("Station","Species","DateTimeOriginal") #define column names
 w <- as.data.frame(w) #make sure this looks good 
 
 #4. compute detection history for a species
-DetHist1 <- detectionHistoryMinutes(recordTable         = w,                     #a list of all capture events with their location and date/time stamp
+DetHist1 <- detectionHistory(recordTable         = w,                     #a list of all capture events with their location and date/time stamp
                              camOp                = camop,                #our camera trap operation matrix
                              stationCol           = "Station",            
                              speciesCol           = "Species",
