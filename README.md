@@ -27,8 +27,5 @@ alt="Using eMammal website" width="240" height="180" border="10" /></a>
 1. Download data from eMammal and store with this repository. If the .csv file fethed from eMammal is altered in anyway, it may not work with script. 
 2. Change line 17 of ```Create_Capture_History.R``` to reflect the name of your .csv file.
 3. Source ```Create_Capture_history.R```
-4. Retrieve capture history from 'Capture Histories' folder.
-
-
-
+4. Retrieve capture history from 'Capture Histories' folder.  
 
