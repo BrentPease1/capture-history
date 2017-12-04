@@ -6,7 +6,7 @@
 
 ---
 
-[eMammal](www.emammal.si.edu) is a data management system and archive for camera trap research projects, and is where the [North Carolina Candid Critters](www.nccandidcritters.org) project stores their data.  
+[eMammal](www.emammal.si.edu) is a data management system and archive for camera trap research projects, and is where the [North Carolina Candid Critters](http://www.nccandidcritters.org/) project stores their data.  
 
 #### For information on how to access eMammal data, see this video: 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=c2HsqLnm51w
